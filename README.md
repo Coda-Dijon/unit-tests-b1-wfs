@@ -18,6 +18,64 @@
 
 * Bonus : faire échouer volontairement un test → ils voient l’intérêt immédiat.
 
+## Code Coverage
+
+Le **code coverage** (couverture de code) mesure le pourcentage de code de production exercé par les tests automatisés. Il révèle les chemins non testés — mais pas la qualité des tests.
+
+> Un coverage de 100 % ne garantit pas l'absence de bugs. Il garantit seulement que chaque ligne a été exécutée au moins une fois.
+
+### Métriques courantes
+
+| Métrique | Description |
+|---|---|
+| **Line / Statement** | % de lignes exécutées |
+| **Branch** | % de branches (if / else / switch) couvertes |
+| **Function** | % de fonctions / méthodes appelées |
+
+Un bon objectif de départ : **80 %** de branch coverage sur le code métier. Au-delà, le ROI diminue rapidement.
+
+### Lancer le coverage
+
+#### Java — JaCoCo via Maven
+
+JaCoCo s'exécute automatiquement pendant `mvn test` grâce au plugin déjà configuré dans le `pom.xml`.
+
+```bash
+cd solutions/java
+mvn test
+# Rapport HTML → target/site/jacoco/index.html
+```
+
+#### PHP — PHPUnit avec Xdebug ou pcov
+
+PHPUnit délègue la collecte au driver PHP installé sur la machine.
+
+```bash
+cd solutions/php
+composer install
+
+# Avec pcov (plus rapide, recommandé en CI)
+php -d pcov.enabled=1 vendor/bin/phpunit
+
+# Avec Xdebug
+XDEBUG_MODE=coverage vendor/bin/phpunit
+
+# Rapport HTML → coverage-report/index.html
+# Résumé affiché directement dans le terminal
+```
+
+#### TypeScript — Vitest + v8
+
+Le provider `v8` est natif Node.js, aucun outil supplémentaire n'est requis.
+
+```bash
+cd solutions/ts
+npm install
+npm run coverage
+# Rapport HTML → coverage-report/index.html
+# Résumé affiché directement dans le terminal
+```
+
 ## **Conclusion**
 * Question finale :
   → “Quel type de test a le plus de valeur à ton niveau actuel ? Pourquoi ?”
