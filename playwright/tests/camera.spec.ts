@@ -8,29 +8,28 @@ import { test, expect } from "@playwright/test";
 test("présente la photo et indique le changement de photo de profil après avoir cliqué sur Continuer", async ({ page }) => {
   await page.goto("/camera.html");
 
-  // Arrange — état initial
-  await expect(page.getByRole("button", { name: "Continuer" })).toBeHidden();
-  await expect(page.getByRole("button", { name: "Prendre une photo" })).toBeDisabled();
-  await expect(page.getByRole("status")).toBeHidden();
+  // TODO 1 — vérifier l'état initial
+  //   - le bouton "Continuer" est masqué
+  //   - le bouton "Prendre une photo" est désactivé
+  //   - la zone de statut (role="status") est masquée
 
-  // Attendre que la caméra soit prête
+  // Attendre que la caméra soit prête — ne pas modifier cette ligne
   await expect(page.getByRole("button", { name: "Prendre une photo" })).toBeEnabled({
     timeout: 5_000,
   });
 
-  // Act — prendre la photo
-  await page.getByRole("button", { name: "Prendre une photo" }).click();
+  // TODO 2 — cliquer sur "Prendre une photo"
 
-  // Aperçu : le bouton Continuer apparaît, la capture disparaît
-  await expect(page.getByRole("button", { name: "Continuer" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Prendre une photo" })).toBeHidden();
+  // TODO 3 — vérifier l'aperçu
+  //   - le bouton "Continuer" est visible
+  //   - le bouton "Prendre une photo" est masqué
 
-  // Act — confirmer
-  await page.getByRole("button", { name: "Continuer" }).click();
+  // TODO 4 — cliquer sur "Continuer"
 
-  // Assert — la photo est affichée et le message de confirmation apparaît
-  await expect(page.getByAltText("Photo capturée")).toBeVisible();
-  await expect(page.getByRole("status")).toBeVisible();
-  await expect(page.getByRole("status")).toContainText("photo de profil");
-  await expect(page.getByRole("button", { name: "Continuer" })).toBeHidden();
+  // TODO 5 — vérifier la confirmation
+  //   - l'image (alt="Photo capturée") est visible
+  //   - la zone de statut contient le texte "photo de profil"
+  //   - le bouton "Continuer" est masqué
+
+  expect(true).toBe(false); // à supprimer une fois les TODOs complétés
 });
