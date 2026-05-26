@@ -1,0 +1,33 @@
+README.md
+  h_0a88d9aba8622a 25,37,47,62,74-80
+ts/how-to.md
+  h_0a88d9aba8622a 62
+solutions/playwright/how-to.md
+  h_0a88d9aba8622a 1,18,44,63,67,71
+playwright/how-to.md
+  h_0a88d9aba8622a 1,22,48,82,88,92,95,98,101,104,123,138,142,153,159,179,216,222,228,236
+  s_a3631a2f30bedb::t_94daf6106c0055 121-122,124-137,139-141,143-152,154-158,160-178,180-208
+php/how-to.md
+  h_0a88d9aba8622a 73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "18d19f208418f200d446023fb805f340cce3210c",
+  "prompts": {},
+  "humans": {
+    "h_0a88d9aba8622a": {
+      "author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_a3631a2f30bedb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2197263b-0e84-4d8a-ba00-a80aa6e262ef",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  }
+}
