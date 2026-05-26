@@ -1,0 +1,12 @@
+{
+  "name": "unit-tests-intro-ts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0",
+    "typescript": "^5.4.0"
+  }
+}
