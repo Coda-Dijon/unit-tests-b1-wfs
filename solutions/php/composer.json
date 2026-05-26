@@ -1,0 +1,25 @@
+{
+    "name": "com/clean-tests",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Com\\CleanTests\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yoan Thirion",
+            "email": "yoan.thirion@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nexus.foyer.lu/repository/php-all/",
+            "packagist.org": false
+        }
+    ]
+}
