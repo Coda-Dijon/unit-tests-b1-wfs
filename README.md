@@ -15,7 +15,8 @@
 
 ## Test it or Die Try'in - 60'
 - [java](java/how-to.md)
-- 
+- [php](php/how-to.md)
+- [typescript](ts/how-to.md)
 
 * Bonus : faire échouer volontairement un test → ils voient l’intérêt immédiat.
 
@@ -69,3 +70,4 @@ npm run coverage
 # Rapport HTML → coverage-report/index.html
 # Résumé affiché directement dans le terminal
 ```
+
