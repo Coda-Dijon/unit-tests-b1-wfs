@@ -1,0 +1,61 @@
+solutions/ts/package-lock.json
+  ai_agent 1-2283
+solutions/ts/src/TimeUtility.ts
+  s_a3631a2f30bedb::t_897eb226fde4e9 1-14
+ts/package-lock.json
+  ai_agent 1-1443
+solutions/php/phpunit.xml
+  s_a3631a2f30bedb::t_58c7316765bcf6 1-23
+ts/src/Calculator.ts
+  ai_agent 1-22
+solutions/ts/vitest.config.ts
+  s_a3631a2f30bedb::t_275b3e944e7181 1-17
+.gitignore
+  h_0a88d9aba8622a 3-8
+ts/package.json
+  ai_agent 1-12
+solutions/ts/src/Calculator.ts
+  s_a3631a2f30bedb::t_89ce907cb510bf 1-22
+solutions/ts/tsconfig.json
+  s_a3631a2f30bedb::t_7c888349b90245 1-11
+solutions/ts/tests/calculator.test.ts
+  s_a3631a2f30bedb::t_7740bc23f6e1af 1-66
+solutions/ts/tests/timeUtility.test.ts
+  s_a3631a2f30bedb::t_c77ad6f84a255b 1-23
+solutions/php/composer.json
+  s_a3631a2f30bedb::t_e01f22d242526e 7-10
+ts/src/TimeUtility.ts
+  ai_agent 1-10
+solutions/ts/package.json
+  s_a3631a2f30bedb::t_e54985fffa7383 6-7,11
+  s_a3631a2f30bedb::t_e4f4a09a6d96a1 1-5,8-10,12-14
+ts/tests/calculator.test.ts
+  ai_agent 1-5
+solutions/ts/src/Clock.ts
+  s_a3631a2f30bedb::t_e17d1310538442 1-3
+solutions/java/pom.xml
+  h_0a88d9aba8622a 12-13,15-19,26-46
+ts/tsconfig.json
+  ai_agent 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "b471af4b93d01e89dc387206a7f2588cb09d1bbe",
+  "prompts": {},
+  "humans": {
+    "h_0a88d9aba8622a": {
+      "author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_a3631a2f30bedb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2197263b-0e84-4d8a-ba00-a80aa6e262ef",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  }
+}
