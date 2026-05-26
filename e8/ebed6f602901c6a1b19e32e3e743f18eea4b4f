@@ -1,0 +1,47 @@
+playwright/playwright.config.ts
+  s_a3631a2f30bedb::t_f488fcfec8e414 1-8,17,19-20,22-39
+  s_a3631a2f30bedb::t_0589d5f612a526 9-16,18,21
+playwright/src/camera.html
+  s_a3631a2f30bedb::t_1be88a90d58aa2 1-15,17-34,54-62,68-74,84-85,88-108,122-125
+  s_a3631a2f30bedb::t_80a7dc85094d23 16,35-53,63-67,75-83,86-87,109-121
+playwright/tests/camera.spec.ts
+  s_a3631a2f30bedb::t_28307b7961a9d8 6,9,11
+  s_a3631a2f30bedb::t_1cdbe499dc2c45 1-5,7,10,12-13,15,17-23,25-26,36
+  s_a3631a2f30bedb::t_866527ef04342d 8,14,16,24,27-35
+README.md
+  h_0a88d9aba8622a 18
+.gitignore
+  h_0a88d9aba8622a 6-7
+playwright/package-lock.json
+  ai_agent 1-96
+playwright/how-to.md
+  h_0a88d9aba8622a 57,80-88
+  s_a3631a2f30bedb::t_dee5591da85db5 28-51
+  s_a3631a2f30bedb::t_29ed9657f812e6 152,154
+  s_a3631a2f30bedb::t_812fa617b20462 1-27,52-56,58-71,121-151,153,155-175
+  s_a3631a2f30bedb::t_a0875b9e14e906 72-79,89-120
+playwright/package.json
+  s_a3631a2f30bedb::t_35b47a4aff52be 1-11,14-15
+  s_a3631a2f30bedb::t_129fc09ed1f32b 12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "e8ebed6f602901c6a1b19e32e3e743f18eea4b4f",
+  "prompts": {},
+  "humans": {
+    "h_0a88d9aba8622a": {
+      "author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_a3631a2f30bedb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2197263b-0e84-4d8a-ba00-a80aa6e262ef",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  }
+}
