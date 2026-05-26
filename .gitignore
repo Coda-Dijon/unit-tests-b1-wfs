@@ -3,6 +3,8 @@ vendor/
 target/
 node_modules/
 coverage-report/
+playwright-report/
+test-results/
 
 .DS_Store
 *.cache

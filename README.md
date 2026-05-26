@@ -15,6 +15,7 @@
 
 ## Test it or Die Try'in - 60'
 - [java](java/how-to.md)
+- 
 
 * Bonus : faire échouer volontairement un test → ils voient l’intérêt immédiat.
 
@@ -30,12 +31,8 @@ Le **code coverage** (couverture de code) mesure le pourcentage de code de produ
 |---|---|
 | **Line / Statement** | % de lignes exécutées |
 | **Branch** | % de branches (if / else / switch) couvertes |
-| **Function** | % de fonctions / méthodes appelées |
-
-Un bon objectif de départ : **80 %** de branch coverage sur le code métier. Au-delà, le ROI diminue rapidement.
 
 ### Lancer le coverage
-
 #### Java — JaCoCo via Maven
 
 JaCoCo s'exécute automatiquement pendant `mvn test` grâce au plugin déjà configuré dans le `pom.xml`.

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prise de photo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      gap: 1rem;
+    }
+    video, #photo {
+      width: 640px;
+      max-width: 100%;
+      border-radius: 8px;
+      background: #000;
+    }
+    canvas { display: none; }
+    #photo { display: none; }
+    button {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #capture-btn { background: #2563eb; color: white; }
+    #capture-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+    #continue-btn { background: #16a34a; color: white; display: none; }
+    #status { color: #6b7280; font-size: 0.9rem; }
+    #confirmation {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 1.25rem 2rem;
+      text-align: center;
+    }
+    #confirmation span {
+      font-size: 2rem;
+    }
+    #confirmation p {
+      margin: 0;
+      color: #15803d;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>Prise de photo</h1>
+  <p id="status">Initialisation de la caméra…</p>
+
+  <video id="video" autoplay playsinline muted></video>
+  <img id="photo" alt="Photo capturée">
+  <canvas id="canvas"></canvas>
+
+  <div id="confirmation" role="status" aria-live="polite">
+    <span>✅</span>
+    <p>Votre photo de profil va être mise à jour.</p>
+  </div>
+
+  <div>
+    <button id="capture-btn" disabled>Prendre une photo</button>
+    <button id="continue-btn">Continuer</button>
+  </div>
+
+  <script>
+    const video       = document.getElementById('video');
+    const canvas      = document.getElementById('canvas');
+    const photo       = document.getElementById('photo');
+    const captureBtn  = document.getElementById('capture-btn');
+    const continueBtn = document.getElementById('continue-btn');
+    const status      = document.getElementById('status');
+    const confirmation= document.getElementById('confirmation');
+
+    let stream = null;
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(s => {
+        stream = s;
+        video.srcObject = stream;
+      })
+      .catch(() => {
+        status.textContent = "Impossible d'accéder à la caméra.";
+      });
+
+    video.addEventListener('canplay', () => {
+      captureBtn.disabled = false;
+      status.textContent = 'Appuyez sur le bouton pour prendre une photo.';
+    });
+
+    captureBtn.addEventListener('click', () => {
+      canvas.width  = video.videoWidth  || 640;
+      canvas.height = video.videoHeight || 480;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+
+      photo.src            = canvas.toDataURL('image/png');
+      photo.style.display  = 'block';
+      video.style.display  = 'none';
+      captureBtn.style.display  = 'none';
+      continueBtn.style.display = 'block';
+      status.textContent = 'Vérifiez votre photo avant de continuer.';
+    });
+
+    continueBtn.addEventListener('click', () => {
+      // Couper le flux caméra
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+      }
+
+      continueBtn.style.display    = 'none';
+      confirmation.style.display   = 'flex';
+      status.textContent           = '';
+    });
+  </script>
+</body>
+</html>
