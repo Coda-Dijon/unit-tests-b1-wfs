@@ -1,0 +1,28 @@
+solutions/php/phpunit.xml
+  s_a3631a2f30bedb::t_8aa70b039fd372 9
+solutions/php/tests/TimeUtilityTest.php
+  h_0a88d9aba8622a 5,7
+solutions/php/tests/CalculatorTest.php
+  h_0a88d9aba8622a 4,6,34-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "483982b143e3cac0cb75dac4bbcde0f9aeabbde7",
+  "prompts": {},
+  "humans": {
+    "h_0a88d9aba8622a": {
+      "author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_a3631a2f30bedb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2197263b-0e84-4d8a-ba00-a80aa6e262ef",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  }
+}
