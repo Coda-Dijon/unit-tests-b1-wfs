@@ -2,6 +2,7 @@
 vendor/
 target/
 node_modules/
+coverage-report/
 
 .DS_Store
 *.cache

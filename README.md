@@ -54,9 +54,6 @@ PHPUnit délègue la collecte au driver PHP installé sur la machine.
 cd solutions/php
 composer install
 
-# Avec pcov (plus rapide, recommandé en CI)
-php -d pcov.enabled=1 vendor/bin/phpunit
-
 # Avec Xdebug
 XDEBUG_MODE=coverage vendor/bin/phpunit
 
@@ -75,7 +72,3 @@ npm run coverage
 # Rapport HTML → coverage-report/index.html
 # Résumé affiché directement dans le terminal
 ```
-
-## **Conclusion**
-* Question finale :
-  → “Quel type de test a le plus de valeur à ton niveau actuel ? Pourquoi ?”
