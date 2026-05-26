@@ -1,0 +1,16 @@
+java/pom.xml
+  h_0a88d9aba8622a 12-13,15-19,26,28-46
+java/src/test/java/unit/tests/intro/CalculatorTests.java
+  h_0a88d9aba8622a 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "c2f89fde59333b526f6c917d8842a1d71c5da377",
+  "prompts": {},
+  "humans": {
+    "h_0a88d9aba8622a": {
+      "author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  }
+}
