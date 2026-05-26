@@ -1,9 +1,9 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "../../src/Calculator.php";
+require_once __DIR__ . "/../src/Calculator.php";
 
-class CalculatorTests extends TestCase
+class CalculatorTest extends TestCase
 {
 
   public function testCalculatorShouldSupportAdd() {
@@ -31,7 +31,8 @@ class CalculatorTests extends TestCase
     $this->assertSame($expected, $result);
   }
 
-  public function additionProvider() {
+  public function additionProvider(): array
+  {
     return [
         'adding zeros'  => [0, 0, Operators::Add, 0],
         'zero plus one' => [0, 1, Operators::Add, 1],

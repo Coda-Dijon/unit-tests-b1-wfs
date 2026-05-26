@@ -18,12 +18,5 @@
             "name": "Yoan Thirion",
             "email": "yoan.thirion@gmail.com"
         }
-    ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://nexus.foyer.lu/repository/php-all/",
-            "packagist.org": false
-        }
     ]
 }

@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "../../src/TimeUtility.php";
+require_once __DIR__ . "/../src/TimeUtility.php";
 
-class TimeUtilityTests extends TestCase {
+class TimeUtilityTest extends TestCase {
 
     protected $clockStub;
 
