@@ -1,4 +1,4 @@
-# Playwright — Tests end-to-end avec mock caméra
+# Playwright : Tests end-to-end avec mock caméra
 
 ## Prérequis
 
@@ -19,7 +19,7 @@ npx playwright install chromium
 
 ## La page testée
 
-`src/camera.html` — une page qui :
+`src/camera.html` : une page qui :
 1. Demande l'accès à la caméra via `getUserMedia`
 2. Affiche le flux vidéo en temps réel
 3. Propose un bouton **Prendre une photo**
@@ -45,7 +45,7 @@ use: {
 - Playwright lance `npx serve src` avant les tests et attend que `http://localhost:3000` réponde.
 - `reuseExistingServer` : si un serveur tourne déjà sur le port 3000 en développement, Playwright le réutilise plutôt que d'en démarrer un second.
 - En CI (`process.env.CI` défini), le serveur est toujours recréé pour garantir un environnement propre.
-- Les tests utilisent simplement `page.goto("/camera.html")` — pas de chemin absolu ni d'import `path`.
+- Les tests utilisent simplement `page.goto("/camera.html")` : pas de chemin absolu ni d'import `path`.
 
 > `npx --yes serve` télécharge `serve` à la volée si nécessaire, aucune installation préalable n'est requise.
 
@@ -79,29 +79,29 @@ Documentation officielle : [playwright.dev/docs/locators](https://playwright.dev
 
 | Priorité | Locator            | Exemple                                      | Quand l'utiliser                                                                                                   |
 |:--------:|--------------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-|    1     | `getByRole`        | `getByRole("button", { name: "Continuer" })` | Toujours en premier — cible l'élément par son rôle ARIA et son nom accessible, exactement comme un lecteur d'écran |
+|    1     | `getByRole`        | `getByRole("button", { name: "Continuer" })` | Toujours en premier : cible l'élément par son rôle ARIA et son nom accessible, exactement comme un lecteur d'écran |
 |    2     | `getByLabel`       | `getByLabel("Adresse e-mail")`               | Champs de formulaire associés à un `<label>`                                                                       |
 |    3     | `getByPlaceholder` | `getByPlaceholder("nom@exemple.fr")`         | Champs sans label mais avec un placeholder                                                                         |
 |    4     | `getByText`        | `getByText("Votre photo de profil")`         | Éléments identifiés par leur contenu textuel visible                                                               |
 |    5     | `getByAltText`     | `getByAltText("Photo capturée")`             | Images (`<img alt="...">`)                                                                                         |
 |    6     | `getByTitle`       | `getByTitle("Fermer")`                       | Éléments avec un attribut `title`                                                                                  |
-|    7     | `getByTestId`      | `getByTestId("submit-btn")`                  | Dernier recours — ajouter `data-testid` si aucune autre option sémantique n'est disponible                         |
+|    7     | `getByTestId`      | `getByTestId("submit-btn")`                  | Dernier recours : ajouter `data-testid` si aucune autre option sémantique n'est disponible                         |
 
 ### Pourquoi cet ordre ?
 
-`getByRole` est prioritaire parce qu'il valide simultanément **la fonctionnalité et l'accessibilité** : si un bouton n'a pas de nom accessible, le test échoue — ce qui est un vrai bug. Un sélecteur CSS comme `.btn-primary` passerait sans signaler le problème.
+`getByRole` est prioritaire parce qu'il valide simultanément **la fonctionnalité et l'accessibilité** : si un bouton n'a pas de nom accessible, le test échoue : ce qui est un vrai bug. Un sélecteur CSS comme `.btn-primary` passerait sans signaler le problème.
 
 ```ts
-// ❌ Fragile — casse si la classe change, ne teste pas l'accessibilité
+// ❌ Fragile : casse si la classe change, ne teste pas l'accessibilité
 page.locator(".btn-green")
 
-// ❌ Fragile — casse si l'ID change, opaque sur l'intention
+// ❌ Fragile : casse si l'ID change, opaque sur l'intention
 page.locator("#continue-btn")
 
-// ✅ Sémantique — correspond à ce que l'utilisateur voit et interagit
+// ✅ Sémantique : correspond à ce que l'utilisateur voit et interagit
 page.getByRole("button", { name: "Continuer" })
 
-// ✅ Sémantique — correspond à l'image que l'utilisateur voit
+// ✅ Sémantique : correspond à l'image que l'utilisateur voit
 page.getByAltText("Photo capturée")
 ```
 
@@ -118,6 +118,94 @@ await expect(page.getByRole("status")).toContainText("photo de profil");
 await expect(page.getByAltText("Photo capturée")).toBeVisible();
 ```
 
+## Mock d'appel REST avec `page.route()`
+
+Playwright intercepte les requêtes réseau **avant** qu'elles partent vers le serveur grâce à `page.route()`. Cela permet de tester l'UI sans dépendre d'une API réelle : elle peut être instable, lente ou inexistante en local.
+
+Documentation officielle : [playwright.dev/docs/mock](https://playwright.dev/docs/mock)
+
+### Principe
+
+```ts
+await page.route(url, handler);
+//                ↑          ↑
+//         pattern glob   fonction appelée à chaque requête interceptée
+```
+
+`url` accepte une chaîne exacte, un glob (`**/api/**`) ou une `RegExp`.  
+Le handler reçoit la `route` et peut soit **fulfiller** (répondre directement), soit **continuer** vers le vrai serveur.
+
+### Exemple : réponse simulée (succès)
+
+```ts
+test("affiche le nom de l'utilisateur chargé depuis l'API", async ({ page }) => {
+  // Arrange : intercepter GET /api/user avant le chargement de la page
+  await page.route("**/api/user", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ name: "Alice Dupont", role: "admin" }),
+    })
+  );
+
+  await page.goto("/profile.html");
+
+  // Assert : l'UI affiche les données mockées
+  await expect(page.getByText("Alice Dupont")).toBeVisible();
+  await expect(page.getByText("admin")).toBeVisible();
+});
+```
+
+### Exemple : réponse simulée (erreur serveur)
+
+```ts
+test("affiche un message d'erreur si l'API renvoie 500", async ({ page }) => {
+  await page.route("**/api/user", (route) =>
+    route.fulfill({
+      status: 500,
+      contentType: "application/json",
+      body: JSON.stringify({ message: "Internal Server Error" }),
+    })
+  );
+
+  await page.goto("/profile.html");
+
+  // L'UI doit afficher une zone d'erreur accessible
+  await expect(page.getByRole("alert")).toBeVisible();
+  await expect(page.getByRole("alert")).toContainText("Erreur");
+});
+```
+
+### Exemple : vérifier qu'une requête POST est bien envoyée
+
+```ts
+test("envoie la photo à l'API lors du clic sur Continuer", async ({ page }) => {
+  let capturedBody: string | null = null;
+
+  await page.route("**/api/profile/photo", async (route) => {
+    capturedBody = route.request().postData();
+    await route.fulfill({ status: 200, body: '{"ok":true}' });
+  });
+
+  await page.goto("/camera.html");
+  await expect(page.getByRole("button", { name: "Prendre une photo" })).toBeEnabled({ timeout: 5_000 });
+  await page.getByRole("button", { name: "Prendre une photo" }).click();
+  await page.getByRole("button", { name: "Continuer" }).click();
+
+  // Vérifier que l'appel a bien eu lieu avec un body non vide
+  expect(capturedBody).not.toBeNull();
+});
+```
+
+### Points clés
+
+| | |
+|---|---|
+| `route.fulfill({...})` | Répond directement sans contacter le serveur |
+| `route.continue()` | Laisse la requête passer vers le vrai serveur |
+| `route.abort()` | Simule une panne réseau |
+| `page.unroute(url)` | Supprime l'intercepteur (utile dans `afterEach`) |
+
 ## Lancer les tests
 
 ### Mode headless (CI, usage quotidien)
@@ -125,19 +213,19 @@ await expect(page.getByAltText("Photo capturée")).toBeVisible();
 npm test
 ```
 
-### Mode headed — navigateur visible
+### Mode headed : navigateur visible
 ```bash
 npm run test:headed
 ```
 Utile pour voir ce que Playwright fait en temps réel.
 
-### Mode UI — interface Playwright interactive
+### Mode UI : interface Playwright interactive
 ```bash
 npm run test:ui
 ```
 Permet d'exécuter, rejouer et inspecter chaque test visuellement avec une timeline et des captures d'écran à chaque étape.
 
-### Mode debug — pas à pas avec Playwright Inspector
+### Mode debug : pas à pas avec Playwright Inspector
 ```bash
 npm run test:debug
 ```
@@ -145,7 +233,7 @@ Ouvre le **Playwright Inspector** : vous avancez action par action, inspectez le
 
 > `--workers=1` est forcé en debug pour éviter les exécutions parallèles qui rendraient l'inspection impossible.
 
-### Mode record — générer un test en cliquant
+### Mode record : générer un test en cliquant
 ```bash
 npm run test:record
 ```

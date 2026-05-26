@@ -70,7 +70,7 @@ abstract class Clock {
 }
 ```
 
-- Pour les *Test Doubles*, PHPUnit fournit `createStub()` nativement — aucune dépendance supplémentaire n'est nécessaire
+- Pour les *Test Doubles*, PHPUnit fournit `createStub()` nativement : aucune dépendance supplémentaire n'est nécessaire
   - Documentation disponible [ici](https://docs.phpunit.de/en/9.6/test-doubles.html)
 
 ```php

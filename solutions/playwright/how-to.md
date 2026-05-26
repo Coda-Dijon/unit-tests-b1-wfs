@@ -1,4 +1,4 @@
-# Playwright — Solution complète
+# Playwright : Solution complète
 
 ## Installation
 
@@ -15,7 +15,7 @@ npm test                  # headless
 npm run test:headed       # navigateur visible
 npm run test:ui           # interface Playwright interactive
 npm run test:debug        # pas à pas avec l'Inspector (--workers=1)
-npm run test:record       # codegen — génère du code en cliquant
+npm run test:record       # codegen : génère du code en cliquant
 ```
 
 > En mode record, démarrer le serveur manuellement dans un terminal séparé :
@@ -41,7 +41,7 @@ Deux flags Chrome, configurés dans `playwright.config.ts`, remplacent la vraie 
 | `--use-fake-device-for-media-stream` | Flux vidéo de test généré en interne par Chrome |
 | `--use-fake-ui-for-media-stream` | Permission caméra accordée sans dialogue |
 
-## Sélecteurs — ordre de priorité
+## Sélecteurs : ordre de priorité
 
 Documentation officielle : [playwright.dev/docs/locators](https://playwright.dev/docs/locators)
 
@@ -60,15 +60,15 @@ Documentation officielle : [playwright.dev/docs/locators](https://playwright.dev
 ## Explication du test
 
 ```
-État 1 — Caméra active
+État 1 : Caméra active
   → getUserMedia déclenché au chargement
   → canplay active le bouton "Prendre une photo"
 
-État 2 — Aperçu (après clic sur "Prendre une photo")
+État 2 : Aperçu (après clic sur "Prendre une photo")
   → canvas capture une frame du flux vidéo
   → photo affichée, bouton "Continuer" visible
 
-État 3 — Confirmation (après clic sur "Continuer")
+État 3 : Confirmation (après clic sur "Continuer")
   → stream.getTracks().forEach(track => track.stop()) coupe la caméra
   → bannière "Votre photo de profil va être mise à jour." affichée
 ```

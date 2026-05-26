@@ -22,7 +22,7 @@
 
 ## Code Coverage
 
-Le **code coverage** (couverture de code) mesure le pourcentage de code de production exercé par les tests automatisés. Il révèle les chemins non testés — mais pas la qualité des tests.
+Le **code coverage** (couverture de code) mesure le pourcentage de code de production exercé par les tests automatisés. Il révèle les chemins non testés : mais pas la qualité des tests.
 
 > Un coverage de 100 % ne garantit pas l'absence de bugs. Il garantit seulement que chaque ligne a été exécutée au moins une fois.
 
@@ -34,7 +34,7 @@ Le **code coverage** (couverture de code) mesure le pourcentage de code de produ
 | **Branch** | % de branches (if / else / switch) couvertes |
 
 ### Lancer le coverage
-#### Java — JaCoCo via Maven
+#### Java : JaCoCo via Maven
 
 JaCoCo s'exécute automatiquement pendant `mvn test` grâce au plugin déjà configuré dans le `pom.xml`.
 
@@ -44,7 +44,7 @@ mvn test
 # Rapport HTML → target/site/jacoco/index.html
 ```
 
-#### PHP — PHPUnit avec Xdebug ou pcov
+#### PHP : PHPUnit avec Xdebug ou pcov
 
 PHPUnit délègue la collecte au driver PHP installé sur la machine.
 
@@ -59,7 +59,7 @@ XDEBUG_MODE=coverage vendor/bin/phpunit
 # Résumé affiché directement dans le terminal
 ```
 
-#### TypeScript — Vitest + v8
+#### TypeScript : Vitest + v8
 
 Le provider `v8` est natif Node.js, aucun outil supplémentaire n'est requis.
 
@@ -71,3 +71,10 @@ npm run coverage
 # Résumé affiché directement dans le terminal
 ```
 
+## Tests end-to-end : Playwright
+
+- [playwright](playwright/how-to.md)
+
+Playwright permet de tester l'interface utilisateur dans un vrai navigateur. Les tests simulent les actions de l'utilisateur (clic, saisie, navigation) et vérifient le résultat affiché.
+
+* Bonus : utiliser le mode `--ui` pour rejouer les tests frame par frame et voir les captures d'écran à chaque étape.

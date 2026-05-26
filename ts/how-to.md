@@ -59,7 +59,7 @@ export class TimeUtility {
 }
 ```
 
-- Pour les *Test Doubles*, `vitest` fournit `vi.fn()` nativement — aucune dépendance supplémentaire n'est nécessaire
+- Pour les *Test Doubles*, `vitest` fournit `vi.fn()` nativement : aucune dépendance supplémentaire n'est nécessaire
   - Documentation disponible [ici](https://vitest.dev/guide/mocking.html)
 
 ```ts
