@@ -8,4 +8,3 @@ test-results/
 
 .DS_Store
 *.cache
-composer.lock
